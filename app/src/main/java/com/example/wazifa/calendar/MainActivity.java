@@ -24,6 +24,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         btSignup.setOnClickListener(this);
         Firebase.setAndroidContext(this);
 
+
     }
 
     @Override

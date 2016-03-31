@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
         btLogin = (Button)findViewById(R.id.btLogin);
         btLogin.setOnClickListener(this);
+
         Firebase.setAndroidContext(this);
     }
 
