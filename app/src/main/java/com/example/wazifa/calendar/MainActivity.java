@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.firebase.client.Firebase;
-
 public class MainActivity extends Activity implements View.OnClickListener{
 
     Button btLogin, btSignup;
@@ -22,9 +20,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         btLogin.setOnClickListener(this);
         btSignup.setOnClickListener(this);
-        Firebase.setAndroidContext(this);
-
-
     }
 
     @Override
