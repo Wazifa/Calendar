@@ -13,13 +13,11 @@ public class CalendarActivity extends AppCompatActivity
     private DBmanager database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //hello eddie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         Firebase.setAndroidContext(this);
         database = new DBmanager();
-        //eddie comment
-        //eddie second
-        //eddie 3
         //System.out.println();
     }
 }
