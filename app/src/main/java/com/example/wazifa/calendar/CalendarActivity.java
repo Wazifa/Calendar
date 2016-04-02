@@ -17,6 +17,8 @@ public class CalendarActivity extends AppCompatActivity
         setContentView(R.layout.activity_calendar);
         Firebase.setAndroidContext(this);
         database = new DBmanager();
+        //eddie comment
+        //eddie second
         //System.out.println();
     }
 }
