@@ -14,6 +14,7 @@ public class CalendarActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //hello eddie
+        //chris was here
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         Firebase.setAndroidContext(this);
