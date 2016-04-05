@@ -33,37 +33,55 @@
             android:layout_height="wrap_content"
             android:id="@+id/tAdd"
             android:text="@string/title_activity_add"
-            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:padding="16dp"/>
 
         <EditText
+            android:id="@+id/etEventTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Set a description"
+            android:hint="Title of Event"
             android:padding="16dp"/>
 
         <EditText
+            android:id="@+id/etEventDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Set a description"
             android:padding="16dp"/>
 
         <DatePicker
+            android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"></DatePicker>
 
         <TimePicker
+            android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="16dp"></TimePicker>
 
-
+        <EditText
+            android:id="@+id/etLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Location of event."
+            android:padding="16dp"/>
 
 
     </LinearLayout>
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Add Event"
+        android:onClick="addEvent"/>
 
+
+</RelativeLayout>
 
 </ScrollView>
