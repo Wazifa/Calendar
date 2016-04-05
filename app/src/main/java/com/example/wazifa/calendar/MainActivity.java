@@ -32,7 +32,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 break;
 
             case R.id.btSignup:
-                //Intent signupIntent = new Intent(this, Signup.class);
+
                 startActivity(new Intent(this, Signup.class));
 
                 break;

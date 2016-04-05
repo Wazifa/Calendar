@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wazifa.calendar">
 
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -28,9 +27,12 @@
         <activity
             android:name=".Signup"
             android:label="@string/title_activity_signup"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CalendarActivity" />
+        <activity
+            android:name=".EventActivity"
+            android:label="@string/title_activity_event"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".CalendarActivity"></activity>
     </application>
-
 
 </manifest>

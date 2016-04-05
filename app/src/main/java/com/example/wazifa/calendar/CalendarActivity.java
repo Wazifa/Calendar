@@ -27,6 +27,12 @@ public class CalendarActivity extends AppCompatActivity
     public void getDate(View v)
     {
         CalendarView view = (CalendarView)findViewById(R.id.calendarView);
-        System.out.println(view.getDate());
+        //System.out.println(view.getDate());
+        view.getDate();
+
+
+
+
+
     }
 }
