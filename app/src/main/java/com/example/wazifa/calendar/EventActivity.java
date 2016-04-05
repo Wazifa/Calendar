@@ -17,11 +17,6 @@ public class EventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event);
         Firebase.setAndroidContext(this);
 
-
-
-
-
-
     }
 
 }
