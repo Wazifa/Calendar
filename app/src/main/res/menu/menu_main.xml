@@ -2,6 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.wazifa.calendar.MainActivity">
+
+    <item android:title="img"
+          android:id="@+id/menu_add"
+          android:icon="@drawable/plus"
+          app:showAsAction="always"/>
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
@@ -9,8 +14,6 @@
         app:showAsAction="never" />
     <item android:id="@+id/menu_view"
           android:title="@string/view_event" />
-    <item android:id="@+id/menu_add"
-        android:title="@string/add_event"/>
     <item android:id="@+id/action_del"
           android:title="@string/del_event"/>
     <item android:id="@+id/menu_up"

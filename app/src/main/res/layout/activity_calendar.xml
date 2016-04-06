@@ -3,34 +3,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Text"
-            android:layout_weight="1"
-            android:id="@+id/text"
-            android:autoText="false"
-            android:visibility="invisible"/>
-
-
-        <ImageView
-            android:layout_width="41dp"
-            android:layout_height="41dp"
-            android:src="@drawable/plus"
-            android:id="@+id/plus"
-            android:onClick="add_event"/>
-
-
-    </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
