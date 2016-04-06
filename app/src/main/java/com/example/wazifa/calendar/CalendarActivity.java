@@ -14,6 +14,8 @@ import com.firebase.client.Firebase;
  */
 public class CalendarActivity extends AppCompatActivity
 {
+
+    // hello there
     private DBmanager database;
     private CalendarView calendar;
     private FrameLayout frame;
