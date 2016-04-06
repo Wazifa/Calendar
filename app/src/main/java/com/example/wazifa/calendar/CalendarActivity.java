@@ -20,6 +20,7 @@ public class CalendarActivity extends AppCompatActivity
     private CalendarView calendar;
     private FrameLayout frame;
     private String date;
+    private User usr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,8 +37,10 @@ public class CalendarActivity extends AppCompatActivity
                 System.out.println(date);
             }
         });
-
+        Intent intent = getIntent();
+        usr=(User)intent.getSerializableExtra("user");
         frame = (FrameLayout)findViewById(R.id.frame);
+
 
 
 
@@ -52,6 +55,7 @@ public class CalendarActivity extends AppCompatActivity
     public void add_event(View v)
     {
         Intent next = new Intent(this,EventActivity.class);
+        next.putExtra("user",usr);
         next.putExtra("Date",calendar.getDate());
         startActivity(next);
     }

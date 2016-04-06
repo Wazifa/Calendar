@@ -1,9 +1,12 @@
 package com.example.wazifa.calendar;
 
+import java.io.Serializable;
+
 /**
  * Created by Manny on 3/25/16.
  */
-public class User extends Profile {
+
+public class User extends Profile implements Serializable{
     private String username;
     private String email;
     private String password;

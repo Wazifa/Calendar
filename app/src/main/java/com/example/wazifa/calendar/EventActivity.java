@@ -18,6 +18,7 @@ public class EventActivity extends AppCompatActivity {
     DatePicker date;
     Button btEvent;
     TimePicker time;
+    User usr;
 
 
     @Override
@@ -34,6 +35,8 @@ public class EventActivity extends AppCompatActivity {
 
         date = (DatePicker)findViewById(R.id.date);
         time = (TimePicker)findViewById(R.id.time);
+        Intent intent = getIntent();
+        usr = (User)intent.getExtras().getSerializable("user");
     }
 
     public void addEvent(View v)
@@ -49,8 +52,9 @@ public class EventActivity extends AppCompatActivity {
 
 
         DBmanager database  = new DBmanager();
-        //database.putEvent(database.getUser(), event);
+        database.putEvent(usr, event);
         Toast.makeText(EventActivity.this,event.getDate(), Toast.LENGTH_SHORT).show();
+        this.finish();
     }
 
 }

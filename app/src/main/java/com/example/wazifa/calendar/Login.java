@@ -46,6 +46,7 @@ public class Login extends AppCompatActivity {
             {
 
                 next = new Intent(this,CalendarActivity.class);
+                next.putExtra("user",usr);
                 data.authUser(usr.getEmail(),usr.getPassword());
                 startActivity(next);
             }
