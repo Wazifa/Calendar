@@ -12,7 +12,6 @@
         android:layout_width="75dp"
         android:layout_height="50dp"
         android:id="@+id/ivleft"
-        android:src="@drawable/left"
         android:scaleX="1"
         android:scaleY="1"
         android:layout_alignParentTop="true"
@@ -30,7 +29,6 @@
             android:layout_width="50dp"
             android:layout_height="45dp"
             android:id="@+id/ivRight"
-            android:src="@drawable/right"
             android:layout_marginTop="2dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"/>

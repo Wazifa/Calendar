@@ -12,4 +12,11 @@
     <string name="fri">Fri.</string>
     <string name="sat">Sat.</string>
     <string name="sun">Sun.</string>
+    <string name="add_event">Add Event</string>
+    <string name="del_event">Delete Event</string>
+    <string name="up_event">Update Event</string>
+    <string name="share_event">Share Event</string>
+    <string name="about">About Us</string>
+    <string name="view_event">View Event</string>
+    <string name="title_activity_list_event_activty">ListEventActivty</string>
 </resources>

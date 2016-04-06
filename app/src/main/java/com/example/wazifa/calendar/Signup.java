@@ -57,6 +57,7 @@ public class Signup extends AppCompatActivity  {
                 data.createAccount(usr.getEmail(), usr.getPassword());
 
                 Intent next = new Intent(this,CalendarActivity.class);
+                next.putExtra("user",usr);
                 startActivity(next);
 
             }

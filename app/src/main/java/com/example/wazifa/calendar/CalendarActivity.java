@@ -3,6 +3,9 @@ package com.example.wazifa.calendar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.FrameLayout;
@@ -25,6 +28,7 @@ public class CalendarActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_calendar);
         Firebase.setAndroidContext(this);
         database = new DBmanager();
@@ -39,6 +43,8 @@ public class CalendarActivity extends AppCompatActivity
         });
         Intent intent = getIntent();
         usr=(User)intent.getSerializableExtra("user");
+        setTitle(usr.getUsername().toUpperCase()+ " CALENDAR");
+
         frame = (FrameLayout)findViewById(R.id.frame);
 
 
@@ -52,6 +58,13 @@ public class CalendarActivity extends AppCompatActivity
         System.out.println(calendar.getDate());
     }
 
+    public void list_event()
+    {
+        Intent next = new Intent(this,ListEventActivty.class);
+        next.putExtra("user",usr);
+        startActivity(next);
+    }
+
     public void add_event(View v)
     {
         Intent next = new Intent(this,EventActivity.class);
@@ -59,4 +72,23 @@ public class CalendarActivity extends AppCompatActivity
         next.putExtra("Date",calendar.getDate());
         startActivity(next);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main,menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId())
+        {
+            case R.id.menu_add:     add_event(getCurrentFocus());return true;
+            case R.id.menu_view:    list_event();return true;
+            default: return super.onOptionsItemSelected(item);
+        }
+    }
 }
+

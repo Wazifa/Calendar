@@ -108,16 +108,16 @@ public class DBmanager {
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                try
-                {
+                try {
                     Event temp = dataSnapshot.child(eventpath).child(user.getUsername()).child(event.getDate()).getValue(Event.class);
-                    if(temp==null)throw new FirebaseException("Event doesn't exist!");
+                    if (temp == null) throw new FirebaseException("Event doesn't exist!");
                     event.setDate(temp.getDate());
                     event.setTime(temp.getTime());
                     event.setLocation(temp.getLocation());
                     event.setTitle(temp.getTitle());
 
-                }catch(FirebaseException ex){}
+                } catch (FirebaseException ex) {
+                }
             }
 
             @Override
@@ -166,6 +166,22 @@ public class DBmanager {
         });
     }
 
+    public ArrayList getAllEvents(User usr)
+    {
+        ArrayList<Event> eventList = new ArrayList<>();
+        database.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println("There are " + dataSnapshot.getChildrenCount() + " blog posts");
+            }
 
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+        return eventList;
+
+    }
 
 }
