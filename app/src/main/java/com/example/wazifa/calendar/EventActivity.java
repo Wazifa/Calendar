@@ -53,7 +53,7 @@ public class EventActivity extends AppCompatActivity {
 
         DBmanager database  = new DBmanager();
         database.putEvent(usr, event);
-        Toast.makeText(EventActivity.this,event.getDate(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(EventActivity.this,"Event Added", Toast.LENGTH_SHORT).show();
         this.finish();
     }
 

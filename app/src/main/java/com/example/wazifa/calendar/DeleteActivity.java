@@ -105,6 +105,7 @@ public class DeleteActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     database.removeEvent(usr,currentEvent);
+                    Toast.makeText(DeleteActivity.this,"Event Deleted!", Toast.LENGTH_SHORT).show();
                     finish();
                 }
             });
