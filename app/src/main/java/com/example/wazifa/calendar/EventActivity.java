@@ -46,8 +46,8 @@ public class EventActivity extends AppCompatActivity {
         Event event = new Event();
         event.setTitle(etEventTitle.getText().toString());
         event.setLocation(etLocation.getText().toString());
-        event.setTime(time.getCurrentHour().toString() + "." + time.getCurrentMinute());
-        event.setDate(date.getDayOfMonth() + "/" + date.getMonth() + "/" + date.getYear());
+        event.setTime(time.getCurrentHour().toString() + ":" + time.getCurrentMinute());
+        event.setDate(date.getMonth() + "-" + date.getDayOfMonth() + "-" + date.getYear());
 
 
 

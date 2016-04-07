@@ -48,7 +48,6 @@ public class DBmanager {
         return url;
     }
 
-    //TODO return valid user from database
     public User getUser(User usr) {
         user = usr;
 
@@ -98,6 +97,11 @@ public class DBmanager {
                 System.out.println("PUT EVEN IN DATABASE");
             }
         });
+    }
+
+    public void removeEvent(User usr,Event eve)
+    {
+        database.child(eventpath).child(usr.getUsername()).child(eve.getDate()).removeValue();
     }
 
     public Event getEvent(User u ,Event E)
@@ -168,11 +172,17 @@ public class DBmanager {
 
     public ArrayList getAllEvents(User usr)
     {
-        ArrayList<Event> eventList = new ArrayList<>();
+        final String name =usr.getUsername();
+        final ArrayList<Event> eventList = new ArrayList<>();
         database.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("There are " + dataSnapshot.getChildrenCount() + " blog posts");
+
+                for(DataSnapshot shot: dataSnapshot.child(eventpath).child(name).getChildren())
+                {
+                    Event temp = shot.getValue(Event.class);
+                    eventList.add(temp);
+                }
             }
 
             @Override

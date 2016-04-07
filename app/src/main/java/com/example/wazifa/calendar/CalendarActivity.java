@@ -73,6 +73,7 @@ public class CalendarActivity extends AppCompatActivity
         startActivity(next);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -90,5 +91,7 @@ public class CalendarActivity extends AppCompatActivity
             default: return super.onOptionsItemSelected(item);
         }
     }
+
+
 }
 

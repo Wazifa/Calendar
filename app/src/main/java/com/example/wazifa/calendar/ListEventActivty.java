@@ -1,43 +1,91 @@
 package com.example.wazifa.calendar;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.ListAdapter;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.firebase.client.Firebase;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class ListEventActivty extends AppCompatActivity
+public class ListEventActivty extends Activity
 {
     private ListView elist;
     private User usr;
     private DBmanager database;
-    private ArrayList<Event> eventList;
+    private List<Event> events;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_event_activty);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+
+
         Firebase.setAndroidContext(this);
+
         usr = (User)getIntent().getSerializableExtra("user");
+
         database = new DBmanager();
+        setup_list();
+
+        setContentView(R.layout.activity_list_event_activty);
+
         elist = (ListView)findViewById(R.id.event_listview);
-        eventList = new ArrayList<>();
-        setTitle(usr.getUsername().toUpperCase()+" Events");
 
+        super.onCreate(savedInstanceState);
+
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //setSupportActionBar(toolbar);
+
+        setTitle(usr.getUsername().toUpperCase() + " Events");
+
+        ArrayAdapter<Event> adapter = new EventAdapter();
+        elist.setAdapter(adapter);
 
 
     }
 
-    public void setup_list()
+    private void setup_list()
     {
-        eventList = database.getAllEvents(usr);
-        ListAdapter adapter = elist.getAdapter();
+        System.err.println(usr.getUsername());
+        events = database.getAllEvents(usr);
 
     }
+
+    private class EventAdapter extends ArrayAdapter<Event>
+    {
+        public EventAdapter()
+        {
+            super(ListEventActivty.this, R.layout.event_view, events);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
+        {
+            View item=convertView;
+
+            if(item == null) item = getLayoutInflater().inflate(R.layout.event_view,parent,false);
+
+            Event currentEvent =  events.get(position);
+
+            TextView eventTitle = (TextView)item.findViewById(R.id.event_title);
+            eventTitle.setText(currentEvent.getTitle());
+
+            TextView eventDate = (TextView)item.findViewById(R.id.event_date);
+            eventDate.setText(currentEvent.getDate());
+
+            TextView eventTime = (TextView)item.findViewById(R.id.event_time);
+            eventTime.setText(currentEvent.getTime());
+            return item;
+        }
+
+    }
+
 }
