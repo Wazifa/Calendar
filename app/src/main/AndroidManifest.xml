@@ -56,11 +56,6 @@
             android:label="@string/title_activity_share"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity
-            android:name=".Share"
-            android:label="@string/title_activity_share"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
     </application>
 
 </manifest>

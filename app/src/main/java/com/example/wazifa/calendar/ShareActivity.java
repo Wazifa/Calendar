@@ -2,6 +2,7 @@ package com.example.wazifa.calendar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -73,15 +74,19 @@ public class ShareActivity extends Activity
 
             if(item == null) item = getLayoutInflater().inflate(R.layout.content_share,parent,false);
 
-            Event currentEvent = events.get(position);
+            final Event currentEvent = events.get(position);
 
             TextView eventTitle = (TextView)item.findViewById(R.id.event_title);
             eventTitle.setText(currentEvent.getTitle());
             eventTitle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(ShareActivity.this, Share.class);
-                    startActivity(intent);
+                    Intent sendIntent = new Intent(Intent.ACTION_VIEW);
+                    sendIntent.setType("plain/text");
+                    sendIntent.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "uCalendar: " + currentEvent.getTitle());
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Event: " + currentEvent.getTitle() + "\n" + "Date: " + currentEvent.getDate() + "\n" + "Time: " + currentEvent.getTime());
+                    startActivity(sendIntent);
                 }
             });
 
