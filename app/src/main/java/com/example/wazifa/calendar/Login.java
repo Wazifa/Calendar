@@ -41,11 +41,12 @@ public class Login extends AppCompatActivity {
             usr=data.getUser(usr);
             String pass = etPassword.getText().toString();
             Intent next;
+            next = new Intent(this,CalendarActivity.class);
 
             if(pass.equals(usr.getPassword()))
             {
 
-                next = new Intent(this,CalendarActivity.class);
+
                 next.putExtra("user",usr);
                 data.authUser(usr.getEmail(),usr.getPassword());
                 startActivity(next);

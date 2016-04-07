@@ -88,10 +88,16 @@ public class CalendarActivity extends AppCompatActivity
         {
             case R.id.menu_add:     add_event(getCurrentFocus());return true;
             case R.id.menu_view:    list_event();return true;
+            case R.id.menu_del:      del_event();return true;
             default: return super.onOptionsItemSelected(item);
         }
     }
-
+    private void del_event()
+    {
+        Intent next = new Intent(this,DeleteActivity.class);
+        next.putExtra("user",usr);
+        startActivity(next);
+    }
 
 }
 

@@ -14,7 +14,7 @@
         app:showAsAction="never" />
     <item android:id="@+id/menu_view"
           android:title="@string/view_event" />
-    <item android:id="@+id/action_del"
+    <item android:id="@+id/menu_del"
           android:title="@string/del_event"/>
     <item android:id="@+id/menu_up"
           android:title="@string/up_event" />
