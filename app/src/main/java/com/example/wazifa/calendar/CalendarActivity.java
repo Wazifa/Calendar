@@ -77,7 +77,7 @@ public class CalendarActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main,menu);
+        inflater.inflate(R.menu.menu_main, menu);
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -89,8 +89,16 @@ public class CalendarActivity extends AppCompatActivity
             case R.id.menu_add:     add_event(getCurrentFocus());return true;
             case R.id.menu_view:    list_event();return true;
             case R.id.menu_del:      del_event();return true;
+            case R.id.menu_share:    share_even();return true;
             default: return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void share_even()
+    {
+        Intent next = new Intent(this,ShareActivity.class);
+        next.putExtra("user",usr);
+        startActivity(next);
     }
     private void del_event()
     {

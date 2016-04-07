@@ -3,7 +3,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="30dp"
+                android:padding="60dp"
                 tools:context="com.example.wazifa.calendar.Login"
     >
 
@@ -15,6 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:text="Login"
+        android:background="@drawable/button"
         android:onClick="login"/>
 
     <LinearLayout
@@ -29,6 +30,7 @@
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
+            android:background="@drawable/text_box"
             android:layout_height="40dp"
             android:hint="@string/user"
             android:inputType="textEmailAddress"
@@ -38,6 +40,7 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:background="@drawable/text_box"
             android:hint="Password"
             android:inputType="textPassword"
             android:padding="10dip"/>
