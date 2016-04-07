@@ -20,4 +20,5 @@
     <string name="view_event">View Event</string>
     <string name="title_activity_list_event_activty">ListEventActivty</string>
     <string name="title_activity_delete">DeleteActivity</string>
+    <string name="user">User Name</string>
 </resources>

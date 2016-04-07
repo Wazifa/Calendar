@@ -14,14 +14,6 @@
     tools:showIn="@layout/activity_delete">
 
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/del_spinner"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="81dp"/>
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,5 +22,23 @@
         android:onClick="dele"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="76dp"/>
+        android:layout_marginBottom="76dp"
+        android:visibility="invisible"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/del_listview"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="57dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/del_text"
+        android:hint="date"
+        android:layout_above="@+id/button"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible"/>
 </RelativeLayout>

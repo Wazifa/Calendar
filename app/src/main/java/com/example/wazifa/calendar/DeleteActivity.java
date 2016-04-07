@@ -1,58 +1,118 @@
 package com.example.wazifa.calendar;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 
 import java.util.List;
 
-public class DeleteActivity extends AppCompatActivity {
+public class DeleteActivity extends Activity {
 
-    private Spinner spin;
-    private DBmanager database;
+    private ListView elist;
     private User usr;
-    private List<Event>events;
-    private ArrayAdapter<Event>adapter;
+    private DBmanager database;
+    private List<Event> events;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        usr = (User)getIntent().getSerializableExtra("user");
+    protected void onCreate(Bundle savedInstanceState)
+    {
+
+
+
         Firebase.setAndroidContext(this);
+
+        usr = (User)getIntent().getSerializableExtra("user");
+
         database = new DBmanager();
-        events=database.getAllEvents(usr);
-        super.onCreate(savedInstanceState);
+        setup_list();
+
         setContentView(R.layout.activity_delete);
-        spin = (Spinner)findViewById(R.id.del_spinner);
-        adapter = new ArrayAdapter<Event>(this,android.R.layout.simple_spinner_dropdown_item,events);
 
-        spin.setAdapter(adapter);
+        elist = (ListView)findViewById(R.id.del_listview);
+
+        super.onCreate(savedInstanceState);
 
 
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        //setSupportActionBar(toolbar);
+
+        setTitle(usr.getUsername().toUpperCase() + " Events");
+
+        ArrayAdapter<Event> adapter = new EventAdapter();
+
+        elist.setAdapter(adapter);
 
 
     }
+    public void dele(View v)  {
+        EditText date = (EditText)findViewById(R.id.del_text);
+        String datetxt=date.getText().toString();
+        Event evee = new Event();
+        evee.setDate(datetxt);
+        database.removeEvent(usr, evee);
+        Toast.makeText(DeleteActivity.this, datetxt + " removed!", Toast.LENGTH_SHORT);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finish();
+    }
 
-    public class EventAdapter extends ArrayAdapter<Event>
+    private void setup_list()
+    {
+        System.err.println(usr.getUsername());
+        events = database.getAllEvents(usr);
+
+    }
+
+    private class EventAdapter extends ArrayAdapter<Event>
     {
         public EventAdapter()
         {
-         super(DeleteActivity.this,R.layout.activity_calendar,events);
+            super(DeleteActivity.this, R.layout.event_view, events);
         }
 
-
-    }
-
-    public void dele(View v)
-    {
-        Event eve = (Event)spin.getSelectedItem();
-        System.err.print(eve);
-        if(eve!=null)
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent)
         {
-            database.removeEvent(usr,eve);
-            finish();
+            View item=convertView;
+
+            if(item == null) item = getLayoutInflater().inflate(R.layout.event_view,parent,false);
+
+            final Event currentEvent =  events.get(position);
+
+            TextView eventTitle = (TextView)item.findViewById(R.id.event_title);
+            eventTitle.setText(currentEvent.getTitle());
+
+            TextView eventDate = (TextView)item.findViewById(R.id.event_date);
+            eventDate.setText(currentEvent.getDate());
+
+            TextView eventTime = (TextView)item.findViewById(R.id.event_time);
+            eventTime.setText(currentEvent.getTime());
+
+            eventTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    database.removeEvent(usr,currentEvent);
+                    finish();
+                }
+            });
+
+            return item;
         }
+
+
+
     }
 }

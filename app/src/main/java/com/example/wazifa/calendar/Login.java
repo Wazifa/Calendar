@@ -42,7 +42,6 @@ public class Login extends AppCompatActivity {
             String pass = etPassword.getText().toString();
             Intent next;
             next = new Intent(this,CalendarActivity.class);
-
             if(pass.equals(usr.getPassword()))
             {
 
