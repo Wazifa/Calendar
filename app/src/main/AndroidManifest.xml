@@ -56,6 +56,10 @@
             android:label="@string/title_activity_share"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".EditActivity">
+        </activity>
+        <activity android:name=".EditListviewActivity">
+        </activity>
     </application>
 
 </manifest>

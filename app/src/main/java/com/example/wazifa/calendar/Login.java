@@ -3,6 +3,8 @@ package com.example.wazifa.calendar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +26,26 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         etEmail = (EditText)findViewById(R.id.etEmail);
+        etEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.toString().equals(""))return;
+                usr.setUsername(s.toString());
+                usr=data.getUser(usr);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
         etPassword = (EditText)findViewById(R.id.etPassword);
 
 
@@ -37,8 +59,7 @@ public class Login extends AppCompatActivity {
     {
         try{
             String username=etEmail.getText().toString();
-            usr.setUsername(username);
-            usr=data.getUser(usr);
+
             String pass = etPassword.getText().toString();
             Intent next;
             next = new Intent(this,CalendarActivity.class);

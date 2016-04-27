@@ -1,12 +1,11 @@
 package com.example.wazifa.calendar;
 
-import java.sql.Time;
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by Manny on 3/25/16.
  */
-public class Event {
+public class Event implements Serializable {
     private String title;
     private String date;
     private String time;

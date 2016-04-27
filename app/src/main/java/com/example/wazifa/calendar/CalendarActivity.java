@@ -90,6 +90,7 @@ public class CalendarActivity extends AppCompatActivity
             case R.id.menu_view:    list_event();return true;
             case R.id.menu_del:      del_event();return true;
             case R.id.menu_share:    share_even();return true;
+            case R.id.menu_up: edit_event();return true;
             default: return super.onOptionsItemSelected(item);
         }
     }
@@ -106,6 +107,13 @@ public class CalendarActivity extends AppCompatActivity
         next.putExtra("user",usr);
         startActivity(next);
     }
+    private void edit_event()
+    {
+        Intent next = new Intent(this,EditListviewActivity.class);
+        next.putExtra("user",usr);
+        startActivity(next);
+    }
+
 
 }
 
