@@ -19,6 +19,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="Event Name"
+    android:background="@drawable/text_box"
     android:id="@+id/name_et"
     />
 
@@ -26,6 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Location"
+        android:background="@drawable/text_box"
         android:id="@+id/location_et"
         />
     <RelativeLayout
