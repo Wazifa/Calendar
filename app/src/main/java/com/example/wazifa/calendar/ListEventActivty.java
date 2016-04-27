@@ -22,9 +22,6 @@ public class ListEventActivty extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
-
-
         Firebase.setAndroidContext(this);
 
         usr = (User)getIntent().getSerializableExtra("user");
@@ -37,7 +34,6 @@ public class ListEventActivty extends Activity
         elist = (ListView)findViewById(R.id.event_listview);
 
         super.onCreate(savedInstanceState);
-
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

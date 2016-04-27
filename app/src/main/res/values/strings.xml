@@ -22,4 +22,9 @@
     <string name="title_activity_delete">DeleteActivity</string>
     <string name="user">User Name</string>
     <string name="title_activity_share">ShareActivity</string>
+    <string name="title_activity_search_event">SearchEvent</string>
+    <string name="search">Search</string>
+    <string name="search_label">Search</string>
+    <string name="search_hint">Search Me</string>
+    <string name="app_label">Search</string>
 </resources>

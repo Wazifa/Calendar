@@ -77,6 +77,11 @@ public class DBmanager {
 
     }
 
+    //Eddie spaghetti code for getevent
+
+
+
+
     public void putUser(User usr)
     {
 

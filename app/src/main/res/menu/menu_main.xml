@@ -22,6 +22,9 @@
           android:title="@string/share_event" />
     <item android:id="@+id/menu_about"
           android:title="@string/about"/>
+    <item android:id="@+id/menu_search"
+        android:title="Search Events"
+        />
 
 
 </menu>
