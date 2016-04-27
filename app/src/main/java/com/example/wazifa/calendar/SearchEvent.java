@@ -3,9 +3,7 @@ package com.example.wazifa.calendar;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,20 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.client.Firebase;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.EventObject;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class SearchEvent extends Activity {
     private ListView elist;
@@ -47,7 +36,7 @@ public class SearchEvent extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         Firebase.setAndroidContext(this);
 
-
+        events = (ArrayList<Event>)getIntent().getSerializableExtra("allEvents");
 
         /*
         Eddie spa code

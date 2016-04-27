@@ -12,6 +12,8 @@ import android.widget.FrameLayout;
 
 import com.firebase.client.Firebase;
 
+import java.util.ArrayList;
+
 /**
  * Created by Manny on 4/1/16.
  */
@@ -24,6 +26,7 @@ public class CalendarActivity extends AppCompatActivity
     private FrameLayout frame;
     private String date;
     private User usr;
+    private ArrayList<Event> allEvents;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -43,6 +46,7 @@ public class CalendarActivity extends AppCompatActivity
         });
         Intent intent = getIntent();
         usr=(User)intent.getSerializableExtra("user");
+        allEvents = database.getAllEvents(usr);
         setTitle(usr.getUsername().toUpperCase()+ " CALENDAR");
 
         frame = (FrameLayout)findViewById(R.id.frame);
@@ -121,6 +125,7 @@ public class CalendarActivity extends AppCompatActivity
         //TODO
         Intent next = new Intent(this, SearchEvent.class);
         next.putExtra("user", usr);
+        next.putExtra("allEvents",allEvents);
         startActivity(next);
     }
 
