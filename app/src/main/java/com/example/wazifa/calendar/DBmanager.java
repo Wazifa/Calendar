@@ -26,7 +26,7 @@ public class DBmanager {
         if(database==null) {
             database = new Firebase(url);
         }else System.out.println("already created!");
-        System.out.println("hello");
+        //System.out.println("hello");
     }
 
     public DBmanager(Firebase database) {

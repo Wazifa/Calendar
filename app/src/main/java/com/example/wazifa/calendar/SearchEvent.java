@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -22,99 +23,143 @@ import com.firebase.client.Firebase;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class SearchEvent extends AppCompatActivity {
-
-    private String[] items;
-    private ArrayList<String> listItems;
-    private ArrayList<String> databaseEvents;
-    private ArrayAdapter<String> adapter;
-    private ArrayList<Event> data;
-    private ListView searchListView;
-    private EditText textsearch;
-    private String eventName;
-    private Event eventSelected;
-
-
-    protected void OnCreate (Bundle savedInstanceState){
-
-        eventSelected = new Event();
+        String[] items;
+        ArrayList<String> listItems;
+        ArrayAdapter<String> adapter;
+        ListView listView;
+        EditText editText;
+        ArrayList<String> databaseEvents;
+        private ArrayList<Event> data;
+        private ListView searchListView;
+        private EditText textsearch;
+        private String eventName;
+        private Event eventSelected;
+        private User usr;
 
 
-        super.onCreate(savedInstanceState);
+        protected void onCreate(Bundle savedInstanceState) {
+
+            //Creates blank event
+            eventSelected = new Event();
+
+            super.onCreate(savedInstanceState);
+
+            //Creates string of all event titles
+            databaseEvents = getIntent().getStringArrayListExtra("allEvents");
+
+            setContentView(R.layout.activity_search_event);
+
+            listView=(ListView)findViewById(R.id.listview);
+
+            editText=(EditText)findViewById(R.id.txtsearch);
+
+            initList();
+
+            editText.addTextChangedListener(new TextWatcher() {
+
+                @Override
+
+                public void beforeTextChanged(CharSequence s, int start, int count, int
+                        after) {
 
 
-        databaseEvents = getIntent().getStringArrayListExtra("allEvents");
-        setContentView(R.layout.activity_search_event);
-
-        searchListView = (ListView) findViewById(R.id.searchListView);
-        textsearch = (EditText) findViewById(R.id.textsearch);
-        initList();
-
-        textsearch.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.toString().equals("")){
-                    //reset list view
-                    initList();
-                }
-                else {
-                    //do search
-                    searchItem(s.toString());
                 }
 
-            }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                @Override
 
-            }
-        });
+                public void onTextChanged(CharSequence s, int start, int before, int
+                        count) {
 
+                    if (s.toString().equals("")) {
 
-        //problem might be here -- > line 4 with setTitle or line 5 with EventActivity.class
-        searchListView.setOnItemClickListener (new AdapterView.OnItemClickListener(){
+                        // reset listview
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                eventName = (String) (parent.getItemAtPosition(position));
-                eventSelected.setTitle(eventName);
+                        initList();
 
+                    } else {
 
-                Intent eventActivity = new Intent(view.getContext(), SearchEvent.class);
-                eventActivity.putExtra("selectedevent",  eventSelected);
-                startActivity(eventActivity);
-            }
-        });
+                        // perform search
+
+                        searchItem(s.toString());
+
+                    }
+
+                }
 
 
+                @Override
 
-    }
+                public void afterTextChanged(Editable s) {
 
-    public void searchItem (String textToSearch){
-        textToSearch = textToSearch.substring(0, 1).toUpperCase() + textToSearch.substring(1);
-        for (String item: items){
-            if (!item.contains(textToSearch)){
-                listItems.remove(item);
-            }
+
+                }
+
+            });
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    eventName = (String) (parent.getItemAtPosition(position));
+                    eventSelected.setTitle(eventName);
+
+
+                    Intent eventActivity = new Intent(view.getContext(), EventActivity.class);
+                    eventActivity.putExtra("selectedevent", eventSelected);
+                    startActivity(eventActivity);
+                }
+            });
 
         }
-        adapter.notifyDataSetChanged();
-    }
 
-    public void initList (){
-        items = new String[databaseEvents.size()];
-        items = databaseEvents.toArray(items);
-        listItems = new ArrayList<>(Arrays.asList(items));
-        adapter = new ArrayAdapter<>(this, R.layout.list_item, R.id.txtitem, listItems);
-        searchListView.setAdapter(adapter);
 
-    }
+
+
+        public void searchItem(String textToSearch){
+            for(String item:listItems){
+
+                if(!item.contains(textToSearch)){
+
+                    listItems.remove(item);
+
+                }
+
+            }
+
+            adapter.notifyDataSetChanged();
+
+        }
+
+        public void initList(){
+
+            String eventString = databaseEvents.toString();
+
+            //Cleans databaseEvents.toString() and stores into items
+            //EX: Before: [Apple, Orange, Banana]
+            //    After: Apple
+            //           Orange
+            //           Banana
+            eventString = eventString.replaceAll("[\\[\\](){}]"," ");
+            String[] items = eventString.split("[,]");
+            for(int i = 0; i < items.length; i++){
+                items[i] = items[i].substring(1);
+                System.out.println(items[i]);
+            }
+
+            listItems = new ArrayList<>(Arrays.asList(items));
+
+            adapter=new ArrayAdapter<String>(this,
+                    R.layout.list_item, R.id.txtitem, listItems);
+
+            listView.setAdapter(adapter);
+
+        }
+
 
 
 }
+
