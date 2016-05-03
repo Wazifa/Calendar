@@ -125,7 +125,7 @@ public class CalendarActivity extends AppCompatActivity
         //TODO
         Intent next = new Intent(this, SearchEvent.class);
         next.putExtra("user", usr);
-        next.putExtra("allEvents",allEvents);
+        //next.putExtra("allEvents",allEvents);
         startActivity(next);
     }
 

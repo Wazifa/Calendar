@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class SearchEvent extends AppCompatActivity {
-        String[] items;
         ArrayList<String> listItems;
         ArrayAdapter<String> adapter;
         ListView listView;
@@ -38,7 +37,8 @@ public class SearchEvent extends AppCompatActivity {
         private String eventName;
         private Event eventSelected;
         private User usr;
-
+        private DBmanager database;
+        private List<Event> events;
 
         protected void onCreate(Bundle savedInstanceState) {
 
@@ -48,7 +48,17 @@ public class SearchEvent extends AppCompatActivity {
             super.onCreate(savedInstanceState);
 
             //Creates string of all event titles
-            databaseEvents = getIntent().getStringArrayListExtra("allEvents");
+            //databaseEvents = getIntent().getStringArrayListExtra("allEvents");
+
+            //System.out.println(databaseEvents);
+
+            Firebase.setAndroidContext(this);
+
+            usr = (User)getIntent().getSerializableExtra("user");
+
+            database = new DBmanager();
+
+            events = database.getAllEvents(usr);
 
             setContentView(R.layout.activity_search_event);
 
@@ -56,7 +66,7 @@ public class SearchEvent extends AppCompatActivity {
 
             editText=(EditText)findViewById(R.id.txtsearch);
 
-            initList();
+            initList( );
 
             editText.addTextChangedListener(new TextWatcher() {
 
@@ -77,13 +87,13 @@ public class SearchEvent extends AppCompatActivity {
                     if (s.toString().equals("")) {
 
                         // reset listview
-
+                        System.out.println("reset listview");
                         initList();
 
                     } else {
 
                         // perform search
-
+                        System.out.println("perform search");
                         searchItem(s.toString());
 
                     }
@@ -116,15 +126,12 @@ public class SearchEvent extends AppCompatActivity {
 
         }
 
-
-
-
         public void searchItem(String textToSearch){
-            for(String item:listItems){
+            for(int i = 0; i < listItems.size(); i++){
 
-                if(!item.contains(textToSearch)){
+                if(!listItems.get(i).contains(textToSearch)){
 
-                    listItems.remove(item);
+                    listItems.remove(i);
 
                 }
 
@@ -135,8 +142,10 @@ public class SearchEvent extends AppCompatActivity {
         }
 
         public void initList(){
-
+            /*
             String eventString = databaseEvents.toString();
+
+            System.out.println(databaseEvents.toString());
 
             //Cleans databaseEvents.toString() and stores into items
             //EX: Before: [Apple, Orange, Banana]
@@ -149,7 +158,15 @@ public class SearchEvent extends AppCompatActivity {
                 items[i] = items[i].substring(1);
                 System.out.println(items[i]);
             }
+            */
+            String[] items = new String[events.size()];
 
+            for(int i = 0; i < events.size(); i++){
+                items[i] = events.get(i).getTitle();
+                System.out.println(items[i]);
+            }
+
+            //transforms items from an array of strings into an arrayList of strings
             listItems = new ArrayList<>(Arrays.asList(items));
 
             adapter=new ArrayAdapter<String>(this,
