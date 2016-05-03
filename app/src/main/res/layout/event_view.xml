@@ -6,24 +6,14 @@
                 android:layout_margin="8dp"
     >
 
-
-        <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/tTitle"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:text="Select an Event"-->
-        <!--android:padding="16dp"/>-->
-
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Title of Event"
             android:id="@+id/event_title"
-            android:maxHeight="100dp"
-            android:maxWidth="130dp"
+            android:maxHeight="50dp"
+            android:maxWidth="150dp"
             android:longClickable="false"
             android:linksClickable="false"
             android:clickable="false"
@@ -36,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="1/12/1011"
+            android:text="Date"
             android:id="@+id/event_date"
 
             android:padding="10dp"
@@ -47,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="3:15pm"
+            android:text="Time"
             android:id="@+id/event_time"
             android:padding="10dp"
             android:layout_alignTop="@+id/event_date"
