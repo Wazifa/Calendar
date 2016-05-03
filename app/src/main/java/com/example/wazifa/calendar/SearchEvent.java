@@ -40,6 +40,7 @@ public class SearchEvent extends AppCompatActivity {
         private DBmanager database;
         private List<Event> events;
 
+        @Override
         protected void onCreate(Bundle savedInstanceState) {
 
             //Creates blank event
@@ -66,7 +67,7 @@ public class SearchEvent extends AppCompatActivity {
 
             editText=(EditText)findViewById(R.id.txtsearch);
 
-            initList( );
+            initList();
 
             editText.addTextChangedListener(new TextWatcher() {
 
@@ -74,7 +75,6 @@ public class SearchEvent extends AppCompatActivity {
 
                 public void beforeTextChanged(CharSequence s, int start, int count, int
                         after) {
-
 
                 }
 
@@ -84,6 +84,10 @@ public class SearchEvent extends AppCompatActivity {
                 public void onTextChanged(CharSequence s, int start, int before, int
                         count) {
 
+                    if (s.toString() == null) {
+                        initList();
+                        System.out.println("GOT IT");
+                    }
                     if (s.toString().equals("")) {
 
                         // reset listview
@@ -108,6 +112,7 @@ public class SearchEvent extends AppCompatActivity {
 
                 }
 
+
             });
 
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -115,15 +120,24 @@ public class SearchEvent extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     eventName = (String) (parent.getItemAtPosition(position));
-                    eventSelected.setTitle(eventName);
+                    //eventSelected.setTitle(eventName);
 
+                    setContentView(R.layout.content_event_view);
 
-                    Intent eventActivity = new Intent(view.getContext(), EventActivity.class);
-                    eventActivity.putExtra("selectedevent", eventSelected);
-                    startActivity(eventActivity);
+                    for(int i = 0; i < events.size(); i++){
+                        if(eventName.equals(events.get(i).getTitle())){
+                            TextView eventTitle = (TextView)findViewById(R.id.event_title);
+                            eventTitle.setText(events.get(i).getTitle());
+
+                            TextView eventDate = (TextView)findViewById(R.id.event_date);
+                            eventDate.setText(events.get(i).getDate());
+
+                            TextView eventTime = (TextView)findViewById(R.id.event_time);
+                            eventTime.setText(events.get(i).getTime());
+                        }
+                    }
                 }
             });
-
         }
 
         public void searchItem(String textToSearch){
@@ -175,8 +189,5 @@ public class SearchEvent extends AppCompatActivity {
             listView.setAdapter(adapter);
 
         }
-
-
-
 }
 
