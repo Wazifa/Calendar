@@ -30,28 +30,15 @@ public class SearchEvent extends AppCompatActivity {
         ArrayAdapter<String> adapter;
         ListView listView;
         EditText editText;
-        ArrayList<String> databaseEvents;
-        private ArrayList<Event> data;
-        private ListView searchListView;
-        private EditText textsearch;
         private String eventName;
         private Event eventSelected;
         private User usr;
         private DBmanager database;
-        private List<Event> events;
+        private ArrayList<Event> events;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
-
-            //Creates blank event
-            eventSelected = new Event();
-
             super.onCreate(savedInstanceState);
-
-            //Creates string of all event titles
-            //databaseEvents = getIntent().getStringArrayListExtra("allEvents");
-
-            //System.out.println(databaseEvents);
 
             Firebase.setAndroidContext(this);
 
@@ -60,6 +47,9 @@ public class SearchEvent extends AppCompatActivity {
             database = new DBmanager();
 
             events = database.getAllEvents(usr);
+
+            //Creates blank event
+            eventSelected = new Event();
 
             setContentView(R.layout.activity_search_event);
 
@@ -75,31 +65,19 @@ public class SearchEvent extends AppCompatActivity {
 
                 public void beforeTextChanged(CharSequence s, int start, int count, int
                         after) {
-
                 }
-
 
                 @Override
 
                 public void onTextChanged(CharSequence s, int start, int before, int
                         count) {
-
-                    if (s.toString() == null) {
-                        initList();
-                        System.out.println("GOT IT");
-                    }
                     if (s.toString().equals("")) {
-
                         // reset listview
-                        System.out.println("reset listview");
                         initList();
-
-                    } else {
-
+                    }
+                    else{
                         // perform search
-                        System.out.println("perform search");
                         searchItem(s.toString());
-
                     }
 
                 }
@@ -120,7 +98,6 @@ public class SearchEvent extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     eventName = (String) (parent.getItemAtPosition(position));
-                    //eventSelected.setTitle(eventName);
 
                     setContentView(R.layout.content_event_view);
 
@@ -156,28 +133,10 @@ public class SearchEvent extends AppCompatActivity {
         }
 
         public void initList(){
-            /*
-            String eventString = databaseEvents.toString();
-
-            System.out.println(databaseEvents.toString());
-
-            //Cleans databaseEvents.toString() and stores into items
-            //EX: Before: [Apple, Orange, Banana]
-            //    After: Apple
-            //           Orange
-            //           Banana
-            eventString = eventString.replaceAll("[\\[\\](){}]"," ");
-            String[] items = eventString.split("[,]");
-            for(int i = 0; i < items.length; i++){
-                items[i] = items[i].substring(1);
-                System.out.println(items[i]);
-            }
-            */
             String[] items = new String[events.size()];
 
             for(int i = 0; i < events.size(); i++){
                 items[i] = events.get(i).getTitle();
-                System.out.println(items[i]);
             }
 
             //transforms items from an array of strings into an arrayList of strings
@@ -187,7 +146,6 @@ public class SearchEvent extends AppCompatActivity {
                     R.layout.list_item, R.id.txtitem, listItems);
 
             listView.setAdapter(adapter);
-
         }
 }
 
